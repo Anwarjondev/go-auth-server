@@ -1,0 +1,10 @@
+# Ignore local dependencies and compiled binaries
+/go/bin/
+/go/pkg/
+*.exe
+*.log
+*.out
+*.swp
+.idea/
+.vscode/
+node_modules/

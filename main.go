@@ -41,5 +41,5 @@ func main() {
 	})
 
 	fmt.Println("server is running on 8080 port")
-	http.ListenAndServe(":8080", secureMux)
+	http.ListenAndServe(":"+port, secureMux)
 }
