@@ -23,7 +23,7 @@ func main() {
 	mux := http.NewServeMux()
 	database.InitializeDB()
 	defer database.DB.Close()
-	fs := http.FileServer(http.Dir("static"))
+	fs := http.FileServer(http.Dir("./static"))
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	mux.HandleFunc("/", handlers.HomeHandler)

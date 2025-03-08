@@ -13,7 +13,7 @@ import (
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		http.ServeFile(w, r, "templates/register.html")
+		http.ServeFile(w, r, "./templates/register.html")
 		return
 	}
 
@@ -33,7 +33,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("templates/login.html"))
+	tmpl := template.Must(template.ParseFiles("./templates/login.html"))
 	if r.Method != http.MethodPost {
 		tmpl.Execute(w, map[string]interface{}{
 			"CSRFToken": csrf.Token(r),
