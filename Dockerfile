@@ -1,28 +1,24 @@
-# Use a lightweight Go image
-FROM golang:1.24.0 AS builder
+    FROM golang:1.24 AS builder
 
-# Set the working directory inside the container
-WORKDIR /app
+    WORKDIR /app
 
-# Copy all files to the container
-COPY . .
+    # Install SQLite dependencies
+    RUN apt-get update && apt-get install -y gcc libc6-dev
 
-# Download dependencies
-RUN go mod tidy
+    # Copy source code
+    COPY . .
 
-# Build the Go application
-RUN go build -o main .
+    # Enable CGO and build the binary
+    ENV CGO_ENABLED=1
+    RUN go build -o go-auth-server .
 
-# Use a minimal base image for the final container
-FROM alpine:latest  
+    # Create a lightweight final image
+    FROM debian:bookworm-slim
 
-WORKDIR /root/
+    WORKDIR /app
 
-# Copy the built binary from the previous stage
-COPY --from=builder /app/main .
+    COPY --from=builder /app/go-auth-server .
 
-# Expose the port
-EXPOSE 8080
+    EXPOSE 8080
 
-# Run the application
-CMD ["./main"]
+    CMD ["./go-auth-server"]
