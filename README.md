@@ -43,7 +43,7 @@ go-auth-server/
 
 ### Clone the Repository
 ```sh
-git clone https://github.com/yourusername/go-auth-server.git
+git clone https://github.com/Anwarjondev/go-auth-server.git
 cd go-auth-server
 ```
 
